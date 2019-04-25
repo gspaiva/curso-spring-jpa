@@ -1,5 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ public class Produto {
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
+
+    @JsonBackReference
     private List<Categoria> categorias = new ArrayList<>();
 
     public Produto() {
