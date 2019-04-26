@@ -1,10 +1,14 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Endereco {
+public class Endereco implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +19,12 @@ public class Endereco {
     private String bairro;
     private String cep;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

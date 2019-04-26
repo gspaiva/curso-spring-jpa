@@ -18,4 +18,10 @@ public class ResourceExceptionHandler {
         StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(),System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(err);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<StandardError> genericException(Exception e, HttpServletRequest request){
+        StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(err);
+    }
 }
