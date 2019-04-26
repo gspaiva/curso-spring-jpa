@@ -1,19 +1,16 @@
 package com.gabriel.paiva.cursomc.cursomc;
 
-import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
-import com.gabriel.paiva.cursomc.cursomc.domains.Cidade;
-import com.gabriel.paiva.cursomc.cursomc.domains.Estado;
-import com.gabriel.paiva.cursomc.cursomc.domains.Produto;
-import com.gabriel.paiva.cursomc.cursomc.repositories.CategoriaRepository;
-import com.gabriel.paiva.cursomc.cursomc.repositories.CidadeRepository;
-import com.gabriel.paiva.cursomc.cursomc.repositories.EstadoRepository;
-import com.gabriel.paiva.cursomc.cursomc.repositories.ProdutoRepository;
+import com.gabriel.paiva.cursomc.cursomc.domains.*;
+import com.gabriel.paiva.cursomc.cursomc.enums.TipoCliente;
+import com.gabriel.paiva.cursomc.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner {
@@ -26,6 +23,10 @@ public class CursomcApplication implements CommandLineRunner {
     EstadoRepository estadoRepository;
     @Autowired
     CidadeRepository cidadeRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
+    @Autowired
+    EnderecoRepository enderecoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
@@ -55,11 +56,21 @@ public class CursomcApplication implements CommandLineRunner {
             Cidade campinas = new Cidade(null, "Campinas",saoPauloEstado);
             Cidade saoPauloCidade = new Cidade(null, "São Paulo",saoPauloEstado);
 
+            Cliente maria = new Cliente(null, "Maria Silva","maria@gmail.com","36378912377", TipoCliente.PESSOAFISICA);
+            maria.getTelefones().add("2722222");
+            maria.getTelefones().add("2711111");
+
+            Endereco endereco1 = new Endereco(null, "Rua flores","300","Apt 203","Jardins","64654",uberlandia,maria);
+            Endereco endereco2 = new Endereco(null, "Avenida mattos","105","Sala 800","Centro","65655",saoPauloCidade,maria);
+
+            maria.getEnderecos().addAll(Arrays.asList(endereco1,endereco2));
 
             estadoRepository.saveAll(Arrays.asList(minasGerais, saoPauloEstado));
             cidadeRepository.saveAll(Arrays.asList(uberlandia,campinas,saoPauloCidade));
             categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
             produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
+            clienteRepository.save(maria);
+            enderecoRepository.saveAll(Arrays.asList(endereco1,endereco2));
 
 
         }catch (Exception e){
