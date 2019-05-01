@@ -21,4 +21,10 @@ public class CategoriaService {
         );
     }
 
+    public Categoria insert (Categoria categoria){
+        categoria.setId(null);
+        categoria = categoriaRepo.save(categoria);
+        return categoria;
+    }
+
 }
