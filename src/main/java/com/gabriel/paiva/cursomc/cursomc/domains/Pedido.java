@@ -3,7 +3,9 @@ package com.gabriel.paiva.cursomc.cursomc.domains;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Pedido implements Serializable {
@@ -24,6 +26,9 @@ public class Pedido implements Serializable {
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "id.pedido")
+    Set<ItemPedido> itens = new HashSet<>();
+
 
     public Pedido(Integer id, Date instante, Endereco enderecoEntrega, Cliente cliente) {
         this.id = id;
@@ -33,6 +38,15 @@ public class Pedido implements Serializable {
     }
 
     public Pedido() {
+    }
+
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     public Integer getId() {

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Produto {
@@ -26,6 +28,9 @@ public class Produto {
     @JsonBackReference
     private List<Categoria> categorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.produto")
+    Set<ItemPedido> itens = new HashSet<>();
+
     public Produto() {
     }
 
@@ -33,6 +38,22 @@ public class Produto {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public List<Pedido> getPedidos(){
+        List<Pedido> pedidos = new ArrayList<>();
+        for(ItemPedido itemPedido : itens){
+            pedidos.add(itemPedido.getPedido());
+        }
+        return pedidos;
     }
 
     public Integer getId() {
