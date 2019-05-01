@@ -1,6 +1,6 @@
 package com.gabriel.paiva.cursomc.cursomc.services;
 
-import com.gabriel.paiva.cursomc.cursomc.Exceptions.ObjectNotFoundException;
+import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
 import com.gabriel.paiva.cursomc.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

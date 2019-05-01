@@ -1,7 +1,6 @@
 package com.gabriel.paiva.cursomc.cursomc.resources.exceptions;
 
-import com.gabriel.paiva.cursomc.cursomc.Exceptions.ObjectNotFoundException;
-import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
+import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.StandardError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

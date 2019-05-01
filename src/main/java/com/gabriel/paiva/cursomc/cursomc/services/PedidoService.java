@@ -1,9 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.services;
 
-import com.gabriel.paiva.cursomc.cursomc.Exceptions.ObjectNotFoundException;
-import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
+import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.Pedido;
-import com.gabriel.paiva.cursomc.cursomc.repositories.CategoriaRepository;
 import com.gabriel.paiva.cursomc.cursomc.repositories.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

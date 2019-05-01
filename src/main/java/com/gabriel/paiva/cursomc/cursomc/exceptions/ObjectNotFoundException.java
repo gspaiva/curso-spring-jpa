@@ -1,4 +1,4 @@
-package com.gabriel.paiva.cursomc.cursomc.Exceptions;
+package com.gabriel.paiva.cursomc.cursomc.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 
