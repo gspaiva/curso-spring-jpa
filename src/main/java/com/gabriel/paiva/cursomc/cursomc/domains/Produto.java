@@ -1,6 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Produto {
     @JsonBackReference
     private List<Categoria> categorias = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.produto")
     Set<ItemPedido> itens = new HashSet<>();
 
@@ -48,6 +50,7 @@ public class Produto {
         this.itens = itens;
     }
 
+    @JsonIgnore
     public List<Pedido> getPedidos(){
         List<Pedido> pedidos = new ArrayList<>();
         for(ItemPedido itemPedido : itens){

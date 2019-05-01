@@ -1,5 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -8,6 +10,7 @@ import java.util.Objects;
 @Entity
 public class ItemPedido implements Serializable {
 
+    @JsonIgnore
     @Id
     private ItemPedidoPK id = new ItemPedidoPK();
     private Double desconto;
@@ -28,7 +31,7 @@ public class ItemPedido implements Serializable {
     public Produto getProduto() {
         return id.getProduto();
     }
-
+    @JsonIgnore
     public Pedido getPedido() {
         return id.getPedido();
     }
