@@ -1,9 +1,11 @@
 package com.gabriel.paiva.cursomc.cursomc.services;
 
+import com.gabriel.paiva.cursomc.cursomc.exceptions.DataIntegrityException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
 import com.gabriel.paiva.cursomc.cursomc.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,6 +32,15 @@ public class CategoriaService {
     public Categoria update(Categoria categoria){
         this.find(categoria.getId());
         return categoriaRepo.save(categoria);
+    }
+
+    public void delete(Integer id){
+        this.find(id);
+        try{
+            categoriaRepo.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não foi possível excluir a categoria pois a mesma possuí produtos vinculados.", e);
+        }
     }
 
 }

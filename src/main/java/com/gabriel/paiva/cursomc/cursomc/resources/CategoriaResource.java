@@ -30,11 +30,17 @@ public class CategoriaResource {
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
-    
+
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ResponseEntity<Void> update (@RequestBody Categoria categoria, @PathVariable Integer id){
         categoria.setId(id);
         categoriaService.update(categoria);
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Integer id){
+        categoriaService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
