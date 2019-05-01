@@ -26,7 +26,7 @@ public class Produto {
             inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
 
-    @JsonBackReference
+    @JsonIgnore
     private List<Categoria> categorias = new ArrayList<>();
 
     @JsonIgnore
