@@ -1,5 +1,6 @@
 package com.gabriel.paiva.cursomc.cursomc.services;
 
+import com.gabriel.paiva.cursomc.cursomc.domains.CategoriaDTO;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.DataIntegrityException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
@@ -54,6 +55,10 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page,linesPerPage,Sort.Direction.valueOf(direction),orderBy);
         return categoriaRepo.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 
 }

@@ -1,10 +1,15 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoriaDTO implements Serializable {
 
     private Integer id;
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min = 5, max = 80, message = "O nome deve conter no máximo 80 caracteres e no mínimo 5")
     private String nome;
 
     public CategoriaDTO() {
