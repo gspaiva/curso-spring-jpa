@@ -1,5 +1,6 @@
-package com.gabriel.paiva.cursomc.cursomc.domains;
+package com.gabriel.paiva.cursomc.cursomc.dtos;
 
+import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;

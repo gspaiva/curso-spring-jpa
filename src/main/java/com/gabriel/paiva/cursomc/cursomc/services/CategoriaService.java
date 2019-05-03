@@ -1,6 +1,6 @@
 package com.gabriel.paiva.cursomc.cursomc.services;
 
-import com.gabriel.paiva.cursomc.cursomc.domains.CategoriaDTO;
+import com.gabriel.paiva.cursomc.cursomc.dtos.CategoriaDTO;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.DataIntegrityException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;

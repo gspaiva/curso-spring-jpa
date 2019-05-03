@@ -1,7 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.resources;
 
 import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
-import com.gabriel.paiva.cursomc.cursomc.domains.CategoriaDTO;
+import com.gabriel.paiva.cursomc.cursomc.dtos.CategoriaDTO;
 import com.gabriel.paiva.cursomc.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
