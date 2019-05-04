@@ -1,9 +1,11 @@
 package com.gabriel.paiva.cursomc.cursomc.dtos;
 
 import com.gabriel.paiva.cursomc.cursomc.domains.Cliente;
+import com.gabriel.paiva.cursomc.cursomc.services.validators.ClienteUpdate;
 
 import java.io.Serializable;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
     private Integer id;
