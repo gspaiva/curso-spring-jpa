@@ -2,6 +2,7 @@ package com.gabriel.paiva.cursomc.cursomc.dtos;
 
 import com.gabriel.paiva.cursomc.cursomc.services.validators.ClienteInsert;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
