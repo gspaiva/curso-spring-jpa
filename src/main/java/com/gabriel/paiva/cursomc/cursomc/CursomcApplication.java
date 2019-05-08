@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,8 @@ public class CursomcApplication implements CommandLineRunner {
     private PagamentoRepository pagamentoRepository;
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
@@ -94,7 +97,7 @@ public class CursomcApplication implements CommandLineRunner {
             Cidade campinas = new Cidade(null, "Campinas",saoPauloEstado);
             Cidade saoPauloCidade = new Cidade(null, "São Paulo",saoPauloEstado);
 
-            Cliente maria = new Cliente(null, "Maria Silva","maria@gmail.com","36378912377", TipoCliente.PESSOAFISICA);
+            Cliente maria = new Cliente(null, "Maria Silva","maria@gmail.com","36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
             maria.getTelefones().add("2722222");
             maria.getTelefones().add("2711111");
 
