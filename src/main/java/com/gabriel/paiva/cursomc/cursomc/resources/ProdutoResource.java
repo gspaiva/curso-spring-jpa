@@ -29,8 +29,8 @@ public class ProdutoResource {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> findAll(
-            @RequestParam(name="nome") String nome,
-            @RequestParam(name="ids") String ids,
+            @RequestParam(name="nome", defaultValue="") String nome,
+            @RequestParam(name="categorias") String ids,
             @RequestParam(name="page", defaultValue="0") Integer page,
             @RequestParam(name="linesPerPage", defaultValue="5") Integer linesPerPage,
             @RequestParam(name="orderBy", defaultValue="nome") String orderBy,
