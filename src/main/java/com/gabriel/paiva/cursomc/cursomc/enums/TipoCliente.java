@@ -1,5 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.enums;
 
+import java.io.Serializable;
+
 public enum TipoCliente {
 
     PESSOAFISICA (1, "Pessoa física"),

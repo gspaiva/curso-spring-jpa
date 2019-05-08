@@ -90,10 +90,6 @@ public class Cliente implements Serializable {
         return TipoCliente.toEnum(this.tipoCliente);
     }
 
-    public void setTipoCliente(TipoCliente tipoCliente) {
-        this.tipoCliente = tipoCliente.getCode();
-    }
-
     public void setTipoCliente(Integer tipoCliente) {
         this.tipoCliente = tipoCliente;
     }

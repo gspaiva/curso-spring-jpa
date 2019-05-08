@@ -1,6 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.gabriel.paiva.cursomc.cursomc.enums.EstadoPagamento;
 
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento implements Serializable {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
