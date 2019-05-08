@@ -34,6 +34,15 @@ public class Pedido implements Serializable {
     @OneToMany(mappedBy = "id.pedido")
     Set<ItemPedido> itens = new HashSet<>();
 
+    private Double totalPedido;
+
+    public Double getTotalPedido() {
+        return itens.stream().mapToDouble(ItemPedido::getSubTotal).reduce(0,(sub1, sub2) -> sub1+sub2);
+    }
+
+    public void setTotalPedido(Double totalPedido) {
+        this.totalPedido = totalPedido;
+    }
 
     public Pedido(Integer id, Date instante, Endereco enderecoEntrega, Cliente cliente) {
         this.id = id;
