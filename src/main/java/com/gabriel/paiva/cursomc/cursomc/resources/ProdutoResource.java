@@ -36,8 +36,9 @@ public class ProdutoResource {
             @RequestParam(name="orderBy", defaultValue="nome") String orderBy,
             @RequestParam(name="direction", defaultValue="ASC") String direction){
 
+        String nomeDecoded = URL.decodedParam(nome);
         List<Integer> idsInt = URL.getIdsFromStringParam(ids);
-        Page<Produto> produtos = produtoService.search(nome,idsInt,page,linesPerPage,orderBy,direction);
+        Page<Produto> produtos = produtoService.search(nomeDecoded,idsInt,page,linesPerPage,orderBy,direction);
         Page<ProdutoDTO> produtoDTOS = produtos.map(produto -> new ProdutoDTO(produto));
         return ResponseEntity.ok().body(produtoDTOS);
     }
