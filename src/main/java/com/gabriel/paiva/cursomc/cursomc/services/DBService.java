@@ -2,6 +2,7 @@ package com.gabriel.paiva.cursomc.cursomc.services;
 
 import com.gabriel.paiva.cursomc.cursomc.domains.*;
 import com.gabriel.paiva.cursomc.cursomc.enums.EstadoPagamento;
+import com.gabriel.paiva.cursomc.cursomc.enums.Perfil;
 import com.gabriel.paiva.cursomc.cursomc.enums.TipoCliente;
 import com.gabriel.paiva.cursomc.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,10 +90,17 @@ public class DBService {
         maria.getTelefones().add("2722222");
         maria.getTelefones().add("2711111");
 
+        Cliente ana = new Cliente(null, "Ana Silva","ana@silva.com","10757496628", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
+        ana.getTelefones().add("212112");
+        ana.getTelefones().add("343434");
+        ana.addPerfil(Perfil.ADMIN);
+
         Endereco endereco1 = new Endereco(null, "Rua flores","300","Apt 203","Jardins","64654",uberlandia,maria);
         Endereco endereco2 = new Endereco(null, "Avenida mattos","105","Sala 800","Centro","65655",saoPauloCidade,maria);
+        Endereco endereco3 = new Endereco(null, "Avenida ana","105","Sala 800","Centro","65655",saoPauloCidade,ana);
 
         maria.getEnderecos().addAll(Arrays.asList(endereco1,endereco2));
+        ana.getEnderecos().addAll(Arrays.asList(endereco3));
 
         estadoRepository.saveAll(Arrays.asList(minasGerais, saoPauloEstado));
         cidadeRepository.saveAll(Arrays.asList(uberlandia,campinas,saoPauloCidade));
@@ -100,8 +108,8 @@ public class DBService {
         categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4,categoria5,categoria6,categoria7,categoria8));
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3,produto4,produto5,produto6,produto7,produto8,produto9,produto10,produto11));
 
-        clienteRepository.save(maria);
-        enderecoRepository.saveAll(Arrays.asList(endereco1,endereco2));
+        clienteRepository.saveAll(Arrays.asList(maria, ana));
+        enderecoRepository.saveAll(Arrays.asList(endereco1,endereco2, endereco3));
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

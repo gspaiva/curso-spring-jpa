@@ -1,6 +1,7 @@
 package com.gabriel.paiva.cursomc.cursomc.domains;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gabriel.paiva.cursomc.cursomc.enums.Perfil;
 import com.gabriel.paiva.cursomc.cursomc.enums.TipoCliente;
 import org.hibernate.validator.constraints.Length;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Cliente implements Serializable {
@@ -38,8 +40,12 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
 
     public Cliente() {
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente, String senha) {
@@ -49,12 +55,14 @@ public class Cliente implements Serializable {
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipoCliente = tipoCliente.getCode();
         this.senha = senha;
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(Integer id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {
@@ -129,6 +137,13 @@ public class Cliente implements Serializable {
         this.pedidos = pedidos;
     }
 
+    public void addPerfil(Perfil perfil){
+        this.perfis.add(perfil.getCode());
+    }
+
+    public Set<Perfil> getPerfis(){
+        return this.perfis.stream().map(code -> Perfil.toEnum(code)).collect(Collectors.toSet());
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
