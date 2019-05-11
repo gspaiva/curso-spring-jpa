@@ -86,11 +86,11 @@ public class DBService {
         Cidade campinas = new Cidade(null, "Campinas",saoPauloEstado);
         Cidade saoPauloCidade = new Cidade(null, "São Paulo",saoPauloEstado);
 
-        Cliente maria = new Cliente(null, "Gabriel Silva","gabriel@gmail.com","36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
+        Cliente maria = new Cliente(null, "Maria Silva","maria@gmail.com","36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
         maria.getTelefones().add("2722222");
         maria.getTelefones().add("2711111");
 
-        Cliente ana = new Cliente(null, "Gabriel Paiva","gabriel_silvapaiva@hotmail.com","10757496628", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
+        Cliente ana = new Cliente(null, "Ana Silva","ana@gmail.com","10757496628", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
         ana.getTelefones().add("212112");
         ana.getTelefones().add("343434");
         ana.addPerfil(Perfil.ADMIN);
@@ -131,7 +131,7 @@ public class DBService {
 
         ItemPedido itemPedido1 = new ItemPedido(produto1,pedido1,0d, 1, 2000d);
         ItemPedido itemPedido2 = new ItemPedido(produto3,pedido1,0d, 2, 80d);
-        ItemPedido itemPedido3 = new ItemPedido(produto2,pedido2,0d, 1, 2000d);
+        ItemPedido itemPedido3 = new ItemPedido(produto2,pedido2,0d, 1, 800d);
 
         pedido1.getItens().addAll(Arrays.asList(itemPedido1, itemPedido2));
         pedido2.getItens().addAll(Arrays.asList(itemPedido3));

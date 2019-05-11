@@ -1,15 +1,17 @@
 package com.gabriel.paiva.cursomc.cursomc.services;
 
-import com.gabriel.paiva.cursomc.cursomc.domains.ItemPedido;
-import com.gabriel.paiva.cursomc.cursomc.domains.PagamentoComBoleto;
-import com.gabriel.paiva.cursomc.cursomc.domains.PagamentoComCartao;
+import com.gabriel.paiva.cursomc.cursomc.domains.*;
 import com.gabriel.paiva.cursomc.cursomc.enums.EstadoPagamento;
+import com.gabriel.paiva.cursomc.cursomc.exceptions.AuthorizationException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
-import com.gabriel.paiva.cursomc.cursomc.domains.Pedido;
 import com.gabriel.paiva.cursomc.cursomc.repositories.ItemPedidoRepository;
 import com.gabriel.paiva.cursomc.cursomc.repositories.PagamentoRepository;
 import com.gabriel.paiva.cursomc.cursomc.repositories.PedidoRepository;
+import com.gabriel.paiva.cursomc.cursomc.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,9 @@ public class PedidoService {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private ClienteService clienteService;
 
     public Pedido buscar (Integer id){
         Optional<Pedido> pedido = pedidoRepository.findById(id);
@@ -68,5 +73,16 @@ public class PedidoService {
 
         return pedido;
     }
+
+    public Page<Pedido> findPage(UserSS userSS, Integer page, Integer linesPerPage, String orderBy, String direction){
+
+        if(userSS == null){
+            throw new AuthorizationException("Access denied");
+        }
+        Cliente cliente = clienteService.find(userSS.getId());
+        PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction),orderBy);
+        return pedidoRepository.findByCliente(cliente,pageRequest);
+    }
+
 
 }
