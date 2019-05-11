@@ -90,7 +90,7 @@ public class DBService {
         maria.getTelefones().add("2722222");
         maria.getTelefones().add("2711111");
 
-        Cliente ana = new Cliente(null, "Ana Silva","ana@silva.com","10757496628", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
+        Cliente ana = new Cliente(null, "Gabriel Paiva","gabriel_silvapaiva@hotmail.com","10757496628", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
         ana.getTelefones().add("212112");
         ana.getTelefones().add("343434");
         ana.addPerfil(Perfil.ADMIN);

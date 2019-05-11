@@ -3,6 +3,7 @@ package com.gabriel.paiva.cursomc.cursomc.resources;
 import com.gabriel.paiva.cursomc.cursomc.domains.Cliente;
 import com.gabriel.paiva.cursomc.cursomc.dtos.ClienteDTO;
 import com.gabriel.paiva.cursomc.cursomc.dtos.ClienteNewDTO;
+import com.gabriel.paiva.cursomc.cursomc.security.IsAdmin;
 import com.gabriel.paiva.cursomc.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,13 +45,13 @@ public class ClienteResource {
         ClienteService.update(cliente);
         return ResponseEntity.noContent().build();
     }
-
+    @IsAdmin
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Void> delete (@PathVariable Integer id){
         ClienteService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
+    @IsAdmin
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDTO>> findAll(){
         List<Cliente> Clientes = ClienteService.findAll();
@@ -58,7 +59,7 @@ public class ClienteResource {
                 .collect(Collectors.toList());
         return ResponseEntity.ok().body(ClienteDTOS);
     }
-
+    @IsAdmin
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     public ResponseEntity<Page<ClienteDTO>> findPage(
             @RequestParam(name="page", defaultValue="0") Integer page,

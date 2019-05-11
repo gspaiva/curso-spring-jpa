@@ -2,10 +2,12 @@ package com.gabriel.paiva.cursomc.cursomc.resources;
 
 import com.gabriel.paiva.cursomc.cursomc.domains.Categoria;
 import com.gabriel.paiva.cursomc.cursomc.dtos.CategoriaDTO;
+import com.gabriel.paiva.cursomc.cursomc.security.IsAdmin;
 import com.gabriel.paiva.cursomc.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,7 +29,7 @@ public class CategoriaResource {
         Categoria categoria = categoriaService.find(id);
         return ResponseEntity.ok().body(categoria);
     }
-
+    @IsAdmin
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO){
         Categoria categoria = categoriaService.fromDTO(categoriaDTO);
@@ -36,7 +38,7 @@ public class CategoriaResource {
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
-
+    @IsAdmin
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ResponseEntity<Void> update (@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Integer id){
         Categoria categoria = categoriaService.fromDTO(categoriaDTO);
@@ -44,7 +46,7 @@ public class CategoriaResource {
         categoriaService.update(categoria);
         return ResponseEntity.noContent().build();
     }
-
+    @IsAdmin
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Void> delete (@PathVariable Integer id){
         categoriaService.delete(id);

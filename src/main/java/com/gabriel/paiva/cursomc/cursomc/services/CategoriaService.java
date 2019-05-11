@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,18 +29,21 @@ public class CategoriaService {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Categoria insert(Categoria categoria){
         categoria.setId(null);
         categoria = categoriaRepo.save(categoria);
         return categoria;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public Categoria update(Categoria obj){
         Categoria newObj = this.find(obj.getId());
         updateData(newObj, obj);
         return categoriaRepo.save(newObj);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public void delete(Integer id){
         this.find(id);
         try{
