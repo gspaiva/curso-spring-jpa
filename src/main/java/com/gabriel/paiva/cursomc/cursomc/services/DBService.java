@@ -86,7 +86,7 @@ public class DBService {
         Cidade campinas = new Cidade(null, "Campinas",saoPauloEstado);
         Cidade saoPauloCidade = new Cidade(null, "São Paulo",saoPauloEstado);
 
-        Cliente maria = new Cliente(null, "Maria Silva","maria@gmail.com","36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
+        Cliente maria = new Cliente(null, "Gabriel Silva","gabriel@gmail.com","36378912377", TipoCliente.PESSOAFISICA,bCryptPasswordEncoder.encode("123"));
         maria.getTelefones().add("2722222");
         maria.getTelefones().add("2711111");
 

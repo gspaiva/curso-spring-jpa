@@ -2,6 +2,7 @@ package com.gabriel.paiva.cursomc.cursomc.resources.exceptions;
 
 import com.gabriel.paiva.cursomc.cursomc.domains.FieldMessage;
 import com.gabriel.paiva.cursomc.cursomc.domains.ValidationError;
+import com.gabriel.paiva.cursomc.cursomc.exceptions.AuthorizationException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.DataIntegrityException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.StandardError;
@@ -38,9 +39,9 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(err);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<StandardError> genericException(Exception e, HttpServletRequest request){
-        StandardError err = new StandardError(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(),System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(err);
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorizationException(AuthorizationException e, HttpServletRequest request){
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(),System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(err);
     }
 }

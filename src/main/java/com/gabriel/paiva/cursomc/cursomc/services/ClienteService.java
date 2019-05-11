@@ -4,12 +4,15 @@ import com.gabriel.paiva.cursomc.cursomc.domains.Cidade;
 import com.gabriel.paiva.cursomc.cursomc.domains.Endereco;
 import com.gabriel.paiva.cursomc.cursomc.dtos.ClienteDTO;
 import com.gabriel.paiva.cursomc.cursomc.dtos.ClienteNewDTO;
+import com.gabriel.paiva.cursomc.cursomc.enums.Perfil;
 import com.gabriel.paiva.cursomc.cursomc.enums.TipoCliente;
+import com.gabriel.paiva.cursomc.cursomc.exceptions.AuthorizationException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.DataIntegrityException;
 import com.gabriel.paiva.cursomc.cursomc.exceptions.ObjectNotFoundException;
 import com.gabriel.paiva.cursomc.cursomc.domains.Cliente;
 import com.gabriel.paiva.cursomc.cursomc.repositories.ClienteRepository;
 import com.gabriel.paiva.cursomc.cursomc.repositories.EnderecoRepository;
+import com.gabriel.paiva.cursomc.cursomc.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -34,10 +37,18 @@ public class ClienteService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Cliente find(Integer id){
+        checkUserPermissions(id);
         Optional<Cliente> cliente = ClienteRepo.findById(id);
         return cliente.orElseThrow(() ->
                 new ObjectNotFoundException("Objeto com ID (" +  id + ") não encontrado.")
         );
+    }
+
+    private void checkUserPermissions(Integer id) {
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+            throw new AuthorizationException("Access denied");
+        }
     }
 
     @Transactional
