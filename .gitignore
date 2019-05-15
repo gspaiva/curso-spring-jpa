@@ -34,3 +34,7 @@ HELP.md
 mvnw/*
 mvnw
 mvnw.*
+
+
+#prod-properties
+src/main/resources/application-prod.properties

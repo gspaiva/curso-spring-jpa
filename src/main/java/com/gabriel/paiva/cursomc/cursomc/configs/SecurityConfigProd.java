@@ -24,15 +24,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Profile(value = "dev")
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@Profile(value = "prod")
+public class SecurityConfigProd extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    private static final String[] PUBLIC_MATCHERS = {
-        "/h2-console/**"
-    };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
             "/produtos/**",
@@ -49,16 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //necessario para o funcionamento do h2-console em modo de teste
-
-        http.headers().frameOptions().disable();
-
         http.cors().and().csrf().disable();
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,PUBLIC_MATCHERS_GET).permitAll()
                 .antMatchers(HttpMethod.POST,PUBLIC_MATCHERS_POST).permitAll()
-                .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(),jwtUtils));
